@@ -172,15 +172,11 @@ module RSpec::Core
       end
     end
 
-    describe '#source_cache' do
-      def source_from_file(path)
-        world.source_cache.source_from_file(path)
-      end
-
+    describe '#source_from_file' do
       it 'caches Source instances by file path' do
-        expect(source_from_file(__FILE__)).to be_a(Source).
-                                          and have_attributes(:path => __FILE__).
-                                          and equal(source_from_file(__FILE__))
+        expect(world.source_from_file(__FILE__)).to be_a(RSpec::Support::Source).
+                                                and have_attributes(:path => __FILE__).
+                                                and equal(world.source_from_file(__FILE__))
       end
     end
 
