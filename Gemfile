@@ -3,7 +3,7 @@ source "https://rubygems.org"
 gemspec
 
 branch = File.read(File.expand_path("../maintenance-branch", __FILE__)).chomp
-%w[rspec rspec-expectations rspec-mocks rspec-support].each do |lib|
+%w[rspec rspec-expectations rspec-mocks].each do |lib|
   library_path = File.expand_path("../../#{lib}", __FILE__)
   if File.exist?(library_path) && !ENV['USE_GIT_REPOS']
     gem lib, :path => library_path
@@ -11,6 +11,8 @@ branch = File.read(File.expand_path("../maintenance-branch", __FILE__)).chomp
     gem lib, :git => "https://github.com/rspec/#{lib}.git", :branch => branch
   end
 end
+
+gem 'rspec-support', :git => "https://github.com/rspec/rspec-support.git", :branch => 'import-source-classes-from-rspec-core'
 
 if RUBY_VERSION >= '1.9.3'
   gem 'rake', '>= 10.0.0'
